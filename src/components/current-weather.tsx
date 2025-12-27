@@ -2,13 +2,11 @@
 import { Card, CardContent } from "./ui/card";
 import { ArrowDown, ArrowUp, Droplets, Wind } from "lucide-react";
 import type { WeatherData, GeocodingResponse } from "@/api/types";
-
 //===================================== Type Definitions ==============================================
 interface CurrentWeatherProps {
   data: WeatherData;
   locationName?: GeocodingResponse;
 }
-
 //===================================== Current Weather Component ==============================================
 export function CurrentWeather({ data, locationName }: CurrentWeatherProps) {
   const {
@@ -16,11 +14,8 @@ export function CurrentWeather({ data, locationName }: CurrentWeatherProps) {
     main: { temp, feels_like, temp_min, temp_max, humidity },
     wind: { speed },
   } = data;
-
   const formatTemp = (temp: number) => `${Math.round(temp)}°`;
-  
   const iconUrl = `https://openweathermap.org/img/wn/${currentWeather.icon}@4x.png`;
-
   return (
     <Card className="overflow-hidden">
       <CardContent className="p-6">
@@ -41,7 +36,6 @@ export function CurrentWeather({ data, locationName }: CurrentWeatherProps) {
                 {locationName?.country}
               </p>
             </div>
-
             <div className="flex items-center gap-2">
               <p className="text-7xl font-bold tracking-tighter">
                 {formatTemp(temp)}

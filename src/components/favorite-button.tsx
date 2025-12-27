@@ -1,18 +1,21 @@
-// src/components/weather/favorite-button.tsx
+//===================================== Imports ==============================================
 import { Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { WeatherData } from "@/api/types";
 import { useFavorites } from "@/hooks/use-favorite";
 import { toast } from "sonner";
 
+//===================================== Type Definitions ==============================================
 interface FavoriteButtonProps {
   data: WeatherData;
 }
 
+//===================================== Favorite Button Component ==============================================
 export function FavoriteButton({ data }: FavoriteButtonProps) {
   const { addFavorite, removeFavorite, isFavorite } = useFavorites();
   const isCurrentlyFavorite = isFavorite(data.coord.lat, data.coord.lon);
 
+  //===================================== Event Handlers ==============================================
   const handleToggleFavorite = () => {
     if (isCurrentlyFavorite) {
       removeFavorite.mutate(`${data.coord.lat}-${data.coord.lon}`);

@@ -1,6 +1,8 @@
+//===================================== Imports ==============================================
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useLocalStorage } from "./use-local-storage";
 
+//===================================== Type Definitions ==============================================
 interface SearchHistoryItem {
   id: string;
   query: string;
@@ -12,6 +14,7 @@ interface SearchHistoryItem {
   searchedAt: number;
 }
 
+//===================================== Search History Hook ==============================================
 export function useSearchHistory() {
   const [history, setHistory] = useLocalStorage<SearchHistoryItem[]>(
     "search-history",
@@ -25,6 +28,7 @@ export function useSearchHistory() {
     initialData: history,
   });
 
+  //===================================== Mutations ==============================================
   const addToHistory = useMutation({
     mutationFn: async (
       search: Omit<SearchHistoryItem, "id" | "searchedAt">
@@ -35,7 +39,6 @@ export function useSearchHistory() {
         searchedAt: Date.now(),
       };
 
-      // Remove duplicates and keep only last 10 searches
       const filteredHistory = history.filter(
         (item) => !(item.lat === search.lat && item.lon === search.lon)
       );

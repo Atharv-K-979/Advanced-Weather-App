@@ -1,12 +1,15 @@
+//===================================== Imports ==============================================
 import { useState, useEffect } from "react";
 import type { Coordinates } from "@/api/types";
 
+//===================================== Type Definitions ==============================================
 interface GeolocationState {
   coordinates: Coordinates | null;
   error: string | null;
   isLoading: boolean;
 }
 
+//===================================== Geolocation Hook ==============================================
 export function useGeolocation() {
   const [locationData, setLocationData] = useState<GeolocationState>({
     coordinates: null,
@@ -14,6 +17,7 @@ export function useGeolocation() {
     isLoading: true,
   });
 
+  //===================================== Location Functions ==============================================
   const getLocation = () => {
     setLocationData((prev) => ({ ...prev, isLoading: true, error: null }));
 
@@ -69,13 +73,12 @@ export function useGeolocation() {
     );
   };
 
-  // Get location on component mount
   useEffect(() => {
     getLocation();
   }, []);
 
   return {
     ...locationData,
-    getLocation, // Expose method to manually refresh location
+    getLocation,
   };
 }

@@ -1,3 +1,4 @@
+//===================================== Imports ==============================================
 import {
   useForecastQuery,
   useReverseGeocodeQuery,
@@ -14,6 +15,7 @@ import { HourlyTemperature } from "../components/hourly-temprature";
 import WeatherSkeleton from "../components/loading-skeleton";
 import { FavoriteCities } from "@/components/favorite-cities";
 
+//===================================== Weather Dashboard Component ==============================================
 export function WeatherDashboard() {
   const {
     coordinates,
@@ -26,7 +28,7 @@ export function WeatherDashboard() {
   const forecastQuery = useForecastQuery(coordinates);
   const locationQuery = useReverseGeocodeQuery(coordinates);
 
-  // Function to refresh all data
+  //===================================== Helper Functions ==============================================
   const handleRefresh = () => {
     getLocation();
     if (coordinates) {
@@ -36,6 +38,7 @@ export function WeatherDashboard() {
     }
   };
 
+  //===================================== Loading States ==============================================
   if (locationLoading) {
     return <WeatherSkeleton />;
   }

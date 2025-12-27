@@ -1,3 +1,4 @@
+//===================================== Imports ==============================================
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import {
   LineChart,
@@ -10,6 +11,7 @@ import {
 import { format } from "date-fns";
 import type { ForecastData } from "@/api/types";
 
+//===================================== Type Definitions ==============================================
 interface HourlyTemperatureProps {
   data: ForecastData;
 }
@@ -20,11 +22,11 @@ interface ChartData {
   feels_like: number;
 }
 
+//===================================== Hourly Temperature Component ==============================================
 export function HourlyTemperature({ data }: HourlyTemperatureProps) {
-  // Get today's forecast data and format for chart
-
+  //===================================== Chart Data Processing ==============================================
   const chartData: ChartData[] = data.list
-    .slice(0, 8) // Get next 24 hours (3-hour intervals)
+    .slice(0, 8)
     .map((item) => ({
       time: format(new Date(item.dt * 1000), "ha"),
       temp: Math.round(item.main.temp),

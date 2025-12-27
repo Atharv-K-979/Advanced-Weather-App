@@ -1,5 +1,7 @@
+//===================================== Imports ==============================================
 import { Skeleton } from "./ui/skeleton";
 
+//===================================== Weather Skeleton Component ==============================================
 function WeatherSkeleton() {
   return (
     <div className="space-y-6">

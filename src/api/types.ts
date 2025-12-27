@@ -1,3 +1,4 @@
+//===================================== Type Definitions ==============================================
 export interface Coordinates {
   lat: number;
   lon: number;

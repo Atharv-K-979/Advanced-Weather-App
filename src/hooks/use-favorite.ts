@@ -1,7 +1,8 @@
-// src/hooks/use-favorites.ts
+//===================================== Imports ==============================================
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useLocalStorage } from "./use-local-storage";
 
+//===================================== Type Definitions ==============================================
 export interface FavoriteCity {
   id: string;
   name: string;
@@ -12,6 +13,7 @@ export interface FavoriteCity {
   addedAt: number;
 }
 
+//===================================== Favorites Hook ==============================================
 export function useFavorites() {
   const [favorites, setFavorites] = useLocalStorage<FavoriteCity[]>(
     "favorites",
@@ -23,9 +25,10 @@ export function useFavorites() {
     queryKey: ["favorites"],
     queryFn: () => favorites,
     initialData: favorites,
-    staleTime: Infinity, // Since we're managing the data in localStorage
+    staleTime: Infinity,
   });
 
+  //===================================== Mutations ==============================================
   const addFavorite = useMutation({
     mutationFn: async (city: Omit<FavoriteCity, "id" | "addedAt">) => {
       const newFavorite: FavoriteCity = {
@@ -34,7 +37,6 @@ export function useFavorites() {
         addedAt: Date.now(),
       };
 
-      // Prevent duplicates
       const exists = favorites.some((fav) => fav.id === newFavorite.id);
       if (exists) return favorites;
 
@@ -43,7 +45,6 @@ export function useFavorites() {
       return newFavorites;
     },
     onSuccess: () => {
-      // Invalidate and refetch
       queryClient.invalidateQueries({ queryKey: ["favorites"] });
     },
   });
@@ -55,7 +56,6 @@ export function useFavorites() {
       return newFavorites;
     },
     onSuccess: () => {
-      // Invalidate and refetch
       queryClient.invalidateQueries({ queryKey: ["favorites"] });
     },
   });

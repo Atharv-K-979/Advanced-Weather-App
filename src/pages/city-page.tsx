@@ -1,3 +1,4 @@
+//===================================== Imports ==============================================
 import { useParams, useSearchParams } from "react-router-dom";
 import { useWeatherQuery, useForecastQuery } from "@/hooks/use-weather";
 import { Alert, AlertDescription } from "@/components/ui/alert";
@@ -9,6 +10,7 @@ import { WeatherForecast } from "../components/weather-forecast";
 import WeatherSkeleton from "../components/loading-skeleton";
 import { FavoriteButton } from "@/components/favorite-button";
 
+//===================================== City Page Component ==============================================
 export function CityPage() {
   const [searchParams] = useSearchParams();
   const params = useParams();

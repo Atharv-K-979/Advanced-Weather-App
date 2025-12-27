@@ -1,4 +1,4 @@
-// src/components/weather/favorite-cities.tsx
+//===================================== Imports ==============================================
 import { useNavigate } from "react-router-dom";
 import { useWeatherQuery } from "@/hooks/use-weather";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { useFavorites } from "@/hooks/use-favorite";
 import { toast } from "sonner";
 
+//===================================== Type Definitions ==============================================
 interface FavoriteCityTabletProps {
   id: string;
   name: string;
@@ -15,6 +16,7 @@ interface FavoriteCityTabletProps {
   onRemove: (id: string) => void;
 }
 
+//===================================== Favorite City Tablet Component ==============================================
 function FavoriteCityTablet({
   id,
   name,
@@ -25,6 +27,7 @@ function FavoriteCityTablet({
   const navigate = useNavigate();
   const { data: weather, isLoading } = useWeatherQuery({ lat, lon });
 
+  //===================================== Event Handlers ==============================================
   const handleClick = () => {
     navigate(`/city/${name}?lat=${lat}&lon=${lon}`);
   };
@@ -82,6 +85,7 @@ function FavoriteCityTablet({
   );
 }
 
+//===================================== Favorite Cities Component ==============================================
 export function FavoriteCities() {
   const { favorites, removeFavorite } = useFavorites();
 

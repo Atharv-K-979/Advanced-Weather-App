@@ -1,21 +1,23 @@
+//===================================== Imports ==============================================
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Sunrise, Sunset, Compass, Gauge } from "lucide-react";
 import { format } from "date-fns";
 import type { WeatherData } from "@/api/types";
 
+//===================================== Type Definitions ==============================================
 interface WeatherDetailsProps {
   data: WeatherData;
 }
 
+//===================================== Weather Details Component ==============================================
 export function WeatherDetails({ data }: WeatherDetailsProps) {
   const { wind, main, sys } = data;
 
-  // Format time using date-fns
+  //===================================== Helper Functions ==============================================
   const formatTime = (timestamp: number) => {
     return format(new Date(timestamp * 1000), "h:mm a");
   };
 
-  // Convert wind degree to direction
   const getWindDirection = (degree: number) => {
     const directions = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
     const index =
@@ -23,6 +25,7 @@ export function WeatherDetails({ data }: WeatherDetailsProps) {
     return directions[index];
   };
 
+  //===================================== Details Configuration ==============================================
   const details = [
     {
       title: "Sunrise",

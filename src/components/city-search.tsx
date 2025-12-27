@@ -1,3 +1,4 @@
+//===================================== Imports ==============================================
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
@@ -17,6 +18,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { useFavorites } from "@/hooks/use-favorite";
 
+//===================================== City Search Component ==============================================
 export function CitySearch() {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
@@ -26,10 +28,10 @@ export function CitySearch() {
   const { favorites } = useFavorites();
   const { history, clearHistory, addToHistory } = useSearchHistory();
 
+  //===================================== Event Handlers ==============================================
   const handleSelect = (cityData: string) => {
     const [lat, lon, name, country] = cityData.split("|");
 
-    // Add to search history
     addToHistory.mutate({
       query,
       name,
@@ -64,7 +66,6 @@ export function CitySearch() {
               <CommandEmpty>No cities found.</CommandEmpty>
             )}
 
-            {/* Favorites Section */}
             {favorites.length > 0 && (
               <CommandGroup heading="Favorites">
                 {favorites.map((city) => (
@@ -88,7 +89,6 @@ export function CitySearch() {
               </CommandGroup>
             )}
 
-            {/* Search History Section */}
             {history.length > 0 && (
               <>
                 <CommandSeparator />
@@ -131,7 +131,6 @@ export function CitySearch() {
               </>
             )}
 
-            {/* Search Results */}
             <CommandSeparator />
             {locations && locations.length > 0 && (
               <CommandGroup heading="Suggestions">

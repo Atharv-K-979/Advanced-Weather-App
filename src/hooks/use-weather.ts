@@ -1,7 +1,9 @@
+//===================================== Imports ==============================================
 import { useQuery } from "@tanstack/react-query";
 import { weatherAPI } from "@/api/weather";
 import type { Coordinates } from "@/api/types";
 
+//===================================== Query Keys ==============================================
 export const WEATHER_KEYS = {
   weather: (coords: Coordinates) => ["weather", coords] as const,
   forecast: (coords: Coordinates) => ["forecast", coords] as const,
@@ -9,6 +11,7 @@ export const WEATHER_KEYS = {
   search: (query: string) => ["location-search", query] as const,
 } as const;
 
+//===================================== Weather Query Hooks ==============================================
 export function useWeatherQuery(coordinates: Coordinates | null) {
   return useQuery({
     queryKey: WEATHER_KEYS.weather(coordinates ?? { lat: 0, lon: 0 }),

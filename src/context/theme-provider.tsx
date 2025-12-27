@@ -1,5 +1,7 @@
+//===================================== Imports ==============================================
 import { createContext, useContext, useEffect, useState } from "react";
 
+//===================================== Type Definitions ==============================================
 type Theme = "dark" | "light" | "system";
 
 type ThemeProviderProps = {
@@ -18,8 +20,10 @@ const initialState: ThemeProviderState = {
   setTheme: () => null,
 };
 
+//===================================== Theme Context ==============================================
 const ThemeProviderContext = createContext<ThemeProviderState>(initialState);
 
+//===================================== Theme Provider Component ==============================================
 export function ThemeProvider({
   children,
   defaultTheme = "system",
@@ -63,6 +67,7 @@ export function ThemeProvider({
   );
 }
 
+//===================================== Theme Hook ==============================================
 export const useTheme = () => {
   const context = useContext(ThemeProviderContext);
 

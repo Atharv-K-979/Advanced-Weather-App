@@ -1,3 +1,4 @@
+//===================================== Imports ==============================================
 import { API_CONFIG } from "./config";
 import type {
   WeatherData,
@@ -6,7 +7,9 @@ import type {
   Coordinates,
 } from "./types";
 
+//===================================== Weather API Class ==============================================
 class WeatherAPI {
+  //===================================== URL Creation ==============================================
   private createUrl(endpoint: string, params: Record<string, string | number>) {
     const searchParams = new URLSearchParams({
       appid: API_CONFIG.API_KEY,
@@ -15,6 +18,7 @@ class WeatherAPI {
     return `${endpoint}?${searchParams.toString()}`;
   }
 
+  //===================================== Data Fetching ==============================================
   private async fetchData<T>(url: string): Promise<T> {
     const response = await fetch(url);
 
@@ -25,6 +29,7 @@ class WeatherAPI {
     return response.json();
   }
 
+  //===================================== API Methods ==============================================
   async getCurrentWeather({ lat, lon }: Coordinates): Promise<WeatherData> {
     const url = this.createUrl(`${API_CONFIG.BASE_URL}/weather`, {
       lat: lat.toString(),
@@ -64,4 +69,5 @@ class WeatherAPI {
   }
 }
 
+//===================================== Export Weather API Instance ==============================================
 export const weatherAPI = new WeatherAPI();

@@ -1,8 +1,10 @@
+//===================================== Imports ==============================================
 import { Link } from "react-router-dom";
 import { CitySearch } from "./city-search";
 import { ThemeToggle } from "./theme-toggle";
 import { useTheme } from "@/context/theme-provider";
 
+//===================================== Header Component ==============================================
 export function Header() {
   const { theme } = useTheme();
 

@@ -1,12 +1,15 @@
+//===================================== Imports ==============================================
 import { Card, CardContent } from "./ui/card";
 import { ArrowDown, ArrowUp, Droplets, Wind } from "lucide-react";
 import type { WeatherData, GeocodingResponse } from "@/api/types";
 
+//===================================== Type Definitions ==============================================
 interface CurrentWeatherProps {
   data: WeatherData;
   locationName?: GeocodingResponse;
 }
 
+//===================================== Current Weather Component ==============================================
 export function CurrentWeather({ data, locationName }: CurrentWeatherProps) {
   const {
     weather: [currentWeather],
@@ -14,7 +17,6 @@ export function CurrentWeather({ data, locationName }: CurrentWeatherProps) {
     wind: { speed },
   } = data;
 
-  // Format temperature
   const formatTemp = (temp: number) => `${Math.round(temp)}°`;
 
   return (

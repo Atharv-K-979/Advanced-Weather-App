@@ -1,6 +1,6 @@
 //===================================== Imports ==============================================
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
-import { Sunrise, Sunset, Compass, Gauge } from "lucide-react";
+import { Sunrise, Sunset, Compass, Gauge, ArrowDown, ArrowUp, Thermometer, Droplets, Wind } from "lucide-react";
 import { format } from "date-fns";
 import type { WeatherData } from "@/api/types";
 
@@ -25,19 +25,45 @@ export function WeatherDetails({ data }: WeatherDetailsProps) {
     return directions[index];
   };
 
+  const formatTemp = (temp: number) => `${Math.round(temp)}°`;
+
   //===================================== Details Configuration ==============================================
   const details = [
     {
-      title: "Sunrise",
-      value: formatTime(sys.sunrise),
-      icon: Sunrise,
+      title: "Current Temperature",
+      value: formatTemp(main.temp),
+      icon: Thermometer,
+      color: "text-yellow-500",
+    },
+    {
+      title: "Min Temperature",
+      value: formatTemp(main.temp_min),
+      icon: ArrowDown,
+      color: "text-blue-500",
+    },
+    {
+      title: "Max Temperature",
+      value: formatTemp(main.temp_max),
+      icon: ArrowUp,
+      color: "text-red-500",
+    },
+    {
+      title: "Feels Like",
+      value: formatTemp(main.feels_like),
+      icon: Thermometer,
       color: "text-orange-500",
     },
     {
-      title: "Sunset",
-      value: formatTime(sys.sunset),
-      icon: Sunset,
-      color: "text-blue-500",
+      title: "Humidity",
+      value: `${main.humidity}%`,
+      icon: Droplets,
+      color: "text-cyan-500",
+    },
+    {
+      title: "Wind Speed",
+      value: `${wind.speed} m/s`,
+      icon: Wind,
+      color: "text-sky-500",
     },
     {
       title: "Wind Direction",
@@ -50,6 +76,18 @@ export function WeatherDetails({ data }: WeatherDetailsProps) {
       value: `${main.pressure} hPa`,
       icon: Gauge,
       color: "text-purple-500",
+    },
+    {
+      title: "Sunrise",
+      value: formatTime(sys.sunrise),
+      icon: Sunrise,
+      color: "text-orange-500",
+    },
+    {
+      title: "Sunset",
+      value: formatTime(sys.sunset),
+      icon: Sunset,
+      color: "text-blue-500",
     },
   ];
 

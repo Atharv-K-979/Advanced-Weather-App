@@ -53,7 +53,7 @@ export function useGeolocation() {
             errorMessage = "Location information is unavailable.";
             break;
           case error.TIMEOUT:
-            errorMessage = "Location request timed out.";
+            errorMessage = "Location request timed out. Please check your connection and try again.";
             break;
           default:
             errorMessage = "An unknown error occurred.";
@@ -66,9 +66,9 @@ export function useGeolocation() {
         });
       },
       {
-        enableHighAccuracy: true,
-        timeout: 5000,
-        maximumAge: 0,
+        enableHighAccuracy: false,
+        timeout: 15000,
+        maximumAge: 300000,
       }
     );
   };

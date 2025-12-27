@@ -18,6 +18,8 @@ export function CurrentWeather({ data, locationName }: CurrentWeatherProps) {
   } = data;
 
   const formatTemp = (temp: number) => `${Math.round(temp)}°`;
+  
+  const iconUrl = `https://openweathermap.org/img/wn/${currentWeather.icon}@4x.png`;
 
   return (
     <Card className="overflow-hidden">
@@ -81,12 +83,21 @@ export function CurrentWeather({ data, locationName }: CurrentWeatherProps) {
 
           <div className="flex flex-col items-center justify-center">
             <div className="relative flex aspect-square w-full max-w-[200px] items-center justify-center">
-              <img
-                src={`https://openweathermap.org/img/wn/${currentWeather.icon}@4x.png`}
-                alt={currentWeather.description}
-                className="h-full w-full object-contain"
-              />
-              <div className="absolute bottom-0 text-center">
+              {currentWeather.icon && (
+                <img
+                  key={currentWeather.icon}
+                  src={iconUrl}
+                  alt={currentWeather.description}
+                  className="h-full w-full object-contain drop-shadow-lg brightness-100"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.src = `https://openweathermap.org/img/wn/${currentWeather.icon}@2x.png`;
+                  }}
+                  loading="eager"
+                  style={{ filter: 'none' }}
+                />
+              )}
+              <div className="absolute bottom-0 text-center w-full">
                 <p className="text-sm font-medium capitalize">
                   {currentWeather.description}
                 </p>
